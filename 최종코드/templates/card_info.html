@@ -1,0 +1,135 @@
+<body>
+    <form action="" method="post">
+        <div name='card_name' style="text-align: center;font-size:30px"><b>{{info[0]}}</b></div>
+        <button type="submit" value='back' name="back" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 175px;"> 뒤로가기 </button>
+        <button type="submit" value='mainpage' name="mainpage" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 25px;"> 메인페이지로 </button>
+        {% if session.get('card_type') == 'monster' %}
+            <table style="width: 50%; margin-left: auto; margin-right: auto; border-spacing : 20px">
+                <tr>
+                    <td style="float:left;width:40%;border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>속성</b></span>
+                            <span style="float: right;">{{info[1]}}</span>
+                        </div>
+                    </td>
+                    <td style="float:right;width:40%;border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>레벨</b></span>
+                            <span style="float: right;">{{info[3]}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>종족</b></span>
+                            <span style="float:right">{{info[2]}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>기타 항목</b></span>
+                            <span style="float:right">{{info[4]}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="float:left;width:40%;border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>공격력</b></span>
+                            <span style="float: right;">{{info[9]}}</span>
+                        </div>
+                    </td>
+                    <td style="float:right;width:40%;border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>수비력</b></span>
+                            <span style="float: right;">{{info[10]}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 2px solid #444444;padding:20px">
+                        <div>
+                            <span><b>카드 텍스트</b></span>
+                            <br>
+                            <span>{{info[-1]}}</span>
+                        </div>
+                    </td>
+                </tr>
+            <table style="width: 75%; margin-left: auto; margin-right: auto; border-spacing : 20px">
+                <tr>
+                    <td style="border: 2px solid #444444;padding:20px">
+                        <div>
+                            <p><b>수록 시리즈</b></p>
+                            <div style="float:left;width:100px;"><b>출시년도</b></div>
+                            <div style="float:left;width:100px;"><b>일련번호</b></div>
+                            <div style="float:left;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팩이름</b></div>
+                            <br>
+                            {% for nums_pack_year in nums_pack_year_list %}
+                                <div style="float:left;width:100px">
+                                    {{nums_pack_year[1][1]}}
+                                </div>
+                                <div style="float:left;width:100px">
+                                    {{nums_pack_year[0][0]}}{{nums_pack_year[0][1]}}
+                                </div>
+                                <div style="float:left;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{nums_pack_year[1][0]}}
+                                </div>
+                                <br>
+                            {% endfor%}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        
+        {% else %}
+            <table style="width: 50%; margin-left: auto; margin-right: auto; border-spacing : 30px">
+                <tr>
+                    <td style="border: 2px solid #444444;padding:30px">
+                        <div>
+                            <span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;효과</b></span>
+                            <span style="float:right;">{{info[1]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 2px solid #444444;padding:30px">
+                        <div>
+                            <span><b>카드 텍스트</b></span>
+                            <br>
+                            <span>{{info[-1]}}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 75%; margin-left: auto; margin-right: auto; border-spacing : 20px">
+                <tr>
+                    <td style="border: 2px solid #444444;padding:20px">
+                        <div>
+                            <p><b>수록 시리즈</b></p>
+                            <div style="float:left;width:100px;"><b>출시년도</b></div>
+                            <div style="float:left;width:100px;"><b>일련번호</b></div>
+                            <div style="float:left;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;팩이름</b></div>
+                            <br>
+                            {% for nums_pack_year in nums_pack_year_list %}
+                                <div style="float:left;width:100px">
+                                    {{nums_pack_year[1][1]}}
+                                </div>
+                                <div style="float:left;width:100px">
+                                    {{nums_pack_year[0][0]}}{{nums_pack_year[0][1]}}
+                                </div>
+                                <div style="float:left;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{nums_pack_year[1][0]}}
+                                </div>
+                                <br>
+                            {% endfor%}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        {%endif%}
+    </form>
+</body>
+

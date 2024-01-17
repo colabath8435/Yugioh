@@ -1,0 +1,106 @@
+body{
+    background:black;
+  }
+  #content{
+    text-align:center;
+    font-size:30px;
+    color:white;
+  }
+   #select{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #startBtn{
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #endBtn{
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    float:left;
+    top: 85%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+  }
+  #mainBtn{
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    top: 85%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+  }
+  #wrapper{
+    width:700px;
+    height:500px;
+    position:absolute;
+    top:77%;
+    left:50%;
+    transform: translate(-50%, -70%);
+  }
+  #nameLeft{
+    text-align:center;
+    font-size:20px;
+    color:white;
+    width:315px;
+    height:10%;
+    float:left;
+  }
+  #nameRight{
+    text-align:center;
+    font-size:20px;
+    color:white;
+    width:315px;
+    height:10%;
+    float:right;
+  }
+  #wrapperLeft{
+    width:45%;
+    height:90%;
+    float:left;
+    text-decoration-line:none;
+  }
+  #wrapperRight{
+    width:45%;
+    height:90%;
+    float:right;
+    text-decoration-line:none;
+  }
+  #winner{
+    width:350px;
+    height:500px;
+    position:absolute;
+    top:77%;
+    left:50%;
+    transform: translate(-50%, -65%);
+  }
+ /* table {
+    width: 100%;
+    border: 5px solid #444444;
+    border-collapse: collapse;
+    color:white;
+  }
+  th {
+    width:100px;
+    border: 1px solid #444444;
+    padding: 10px;
+    color:white;
+    text-align:center;
+  }
+  td {
+    border: 1px solid #444444;
+    border-left:5px solid #444444;
+    padding: 10px;
+    color:white;
+    text-align:center;
+  }*/

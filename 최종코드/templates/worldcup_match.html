@@ -1,0 +1,76 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='worldcup_css.css') }}">
+</head>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='worldcup_css.css') }}">
+</head>
+<body>
+  {% if len_participant_list == 2 and len_winner_list == 0 : %}
+      <div id='content'>결승</div>
+  {% else %}
+      <div id='content'>{{cur_round}}강 {{cur_match_order}}/{{cur_round//2}}</div>
+  {% endif %}
+  <div id='wrapper'>
+      <div id='nameLeft'>{{left[0]}}</div>
+      <div id='nameRight'>{{right[0]}}</div>
+      <a id='wrapperLeft' href={{url_for('selected_left')}}>
+          <table>
+              <tbody>
+                <tr>
+                  <th>공격력</th><td>{{left[9]}}</td>
+                </tr>
+                <tr>
+                  <th>수비력</th><td>{{left[10]}}</td>
+                </tr>
+                <tr>
+                  <th>레벨</th><td>{{left[3]}}</td>
+                </tr>
+                <tr>
+                  <th>속성</th><td>{{left[1]}}</td>
+                </tr>
+                <tr>
+                  <th>종족</th><td>{{left[2]}}</td>
+                </tr>
+                <tr>
+                  <th>카드번호</th>
+                  <td style="width:100px;border: 1px solid #444444; padding: 10px;color:white;text-align:center;">
+                    {% for serial_num, card_num in left_num  %}
+                        {{serial_num}}{{card_num}}
+                        <br>
+                    {% endfor%}
+              </tbody>
+          </table>
+      </a>
+      <a id='wrapperRight' href={{url_for('selected_right')}}>
+        <table>
+          <tbody>
+            <tr>
+              <th>공격력</th><td>{{right[9]}}</td>
+            </tr>
+            <tr>
+              <th>수비력</th><td>{{right[10]}}</td>
+            </tr>
+            <tr>
+              <th>레벨</th><td>{{right[3]}}</td>
+            </tr>
+            <tr>
+              <th>속성</th><td>{{right[1]}}</td>
+            </tr>
+            <tr>
+              <th>종족</th><td>{{right[2]}}</td>
+            </tr>
+            <tr>
+              <th>카드번호</th>
+              <td style="width:100px;border: 1px solid #444444; padding: 10px;color:white;text-align:center;">
+                {% for serial_num, card_num in right_num  %}
+                    {{serial_num}}{{card_num}}
+                    <br>
+                {% endfor%}
+              </td>
+            </tr>
+          </tbody>
+      </table>
+      </a>
+  </div>
+  <button name="cancel" value="canel" onclick="location.href='/search_result'" style="position: absolute; bottom: 20px; width: 200px; height: 30px;">취소</button>
+</body>

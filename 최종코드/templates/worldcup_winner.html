@@ -1,0 +1,35 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='worldcup_css.css') }}">
+</head>
+<body>
+    <div id='content'>우승 - {{winner[0]}}</div>
+    <div id='winner'>
+        <table>
+            <tbody>
+              <tr>
+                <th>공격력</th><td>{{winner[9]}}</td>
+              </tr>
+              <tr>
+                <th>수비력</th><td>{{winner[10]}}</td>
+              </tr>
+              <tr>
+                <th>레벨</th><td>{{winner[3]}}</td>
+              </tr>
+              <tr>
+                <th>속성</th><td>{{winner[1]}}</td>
+              </tr>
+              <tr>
+                <th>종족</th><td>{{winner[2]}}</td>
+              </tr>
+              <tr>
+                <th>카드번호</th><td></td>
+              </tr>
+              <tr>
+                <th>효과</th><td></td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="submit" id="endBtn" onclick="location.href='/worldcup_main'"> 다시하기 </button>
+    <button type="submit" id="mainBtn" onclick="location.href='/mainpage'"> 처음화면 </button> 
+</body>

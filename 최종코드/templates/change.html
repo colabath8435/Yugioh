@@ -1,0 +1,46 @@
+<body>    
+    <form method="POST" action=" ">
+        <h1>회원정보 수정</h1>
+        <button type="submit" name="excommunicate" value="excommunicate" style="position: absolute; right:30px; top: 30px;">탈퇴</button>
+        <div id='id_wrapper' style='margin:20px'>
+            <p>아이디</p>
+            <p>{{session['ID']}}</p>
+        </div>
+        <div id='password_wrapper' style='margin:20px'>
+            <p>비밀번호</p>
+            <input type = "password" name = "password" value = {{session['password']}} minlength=6 maxlength=20 />
+        </div>
+        <div id='confirm_password_wrapper' style='margin:20px'>
+            <p>비밀번호 재입력</p>
+            <input type = "password" name = "password_confirm" value = {{session['password']}} minlength=6 maxlength=20 />
+        </div>
+        <div id='name_wrapper' style='margin:20px'>
+            <p>이름</p>
+            <input type = "text" name = "name" value = {{session['name']}} minlength=2 maxlength=6/>
+        </div>
+        <div id='birth_date_wrapper' style='margin:20px'>
+            <p>생년월일</p>
+            <input type="date" name="birth_date" value = "{{session['birth']}}"/>
+        </div>
+        <div id='gender_wrapper' style='margin:20px'>
+            <p>성별</p>
+            {% if session['gender'] == "남" %}
+                <select name="gender">
+                    <option value="남" selected>남성</option>
+                    <option value="여">여성</option>
+                </select>
+            {% else %}
+                <select name="gender">
+                    <option value="남">남성</option>
+                    <option value="여" selected>여성</option>
+                </select>
+            {% endif %}
+        </div>
+        <div id='email_wrapper' style='margin:20px'>
+            <p>이메일</p>
+            <input type = "text" name = "email" minlength=10 maxlength=30 value={{session['email']}}> 
+        </div>
+        <button type="submit" name="change" value="change" style="position: absolute; left: 30px;"> 수정완료 </button>
+        <button type="submit" name="back" value="back" style="position: absolute; left: 120px;"> 돌아가기 </button>
+    </form>
+</body>

@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='worldcup_css.css') }}">
+</head>
+<body>
+    <form method="POST" action=" ">
+        <div id='content'>유희왕 카드 이상형 월드컵</div>
+        <div id='selectAndStart'>
+        <select id='select' name='select'>
+            {% if total_card_num >= 64 : %}
+            <option value=64>64강</option>
+            {% endif %}
+            {% if total_card_num >= 32 : %}
+            <option value=32>32강</option>
+            {% endif %}
+            {% if total_card_num >= 16 : %}
+            <option value=16>16강</option>
+            {% endif %}
+            {% if total_card_num >= 8 : %}
+            <option value=8>8강</option>
+            {% endif %}
+            {% if total_card_num >= 4 : %}
+            <option value=4>4강</option>
+            {% endif %}
+        </select>
+        <button type="submit", id="startBtn" onclick="location.href='/worldcup_match'"> 시작 </button> 
+        </div>
+    </form>
+</body>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>유희왕DB</title>
+    <link type="text/css" rel="stylesheet" href="webStyle.css">
+</head>
+<body>
+    <p>
+        <h1>유희왕DB</h1>
+    </p>
+    <form action=" " method="post">
+        {% if session.get('logFlag') %}
+        userId : {{ session['name'] }}
+        <button value="logout" type="submit" name="logout">로그아웃</button>
+        <button value="change" type="submit" name="change_info">회원 정보 수정</button>
+        {% else %}
+        <input type="text" placeholder="아이디" id="id_input" name="id_input" style="width:250px;height:30px;font-size:20px; position: absolute; right: 140px; top: 30px;">
+        <input type="password" placeholder="비밀번호" id="pw_input" name="pw_input" style="width:250px;height:30px;font-size:20px; position: absolute; right: 140px; top: 70px;">
+        <button type="submit" name="login" value="로그인" class="P_btn" style="width: 100px; height: 75px; font-size: 15px; position: absolute; top: 30px; right: 30px;">로그인</button>
+        <a href="/register" name="register" style="font-size:20px; position: absolute; right: 40px; top: 120px;">회원 가입</a>
+        {% endif %}
+            
+        <p>
+            <label for="search" id="card_input" >카드 이름:</label>
+            <input type="text" id="search" name="searchname" style="width:300px;height:50px;font-size:20px;">
+            <select id="selection" name="card_type" onclick="chageSelect()">
+                <option value='not_selected'>카드 종류를 선택</option>
+                <option value="monster">몬스터 카드</option>
+                <option value="magic">마법 카드</option>
+                <option value="trap">함정 카드</option>
+            </select>
+            <button type="submit" name="submission" value="확인" class="P_btn" style="width: 100px; height: 50px; font-size: 15px;">확인</button>
+            <input type="button" onclick="cacelclicked()" style="width: 100px; height: 50px; font-size: 15px;" value="취소">
+
+        </p>
+        <script>
+            function cacelclicked(){
+                var el = document.getElementById('search');
+                for(var i=0; i<el.length; i++){
+                    el[i].value = '';
+                }
+                el = document.getElementsByClassName('min_max');
+                for(var i=0; i<el.length; i++){
+                    el[i].value = '';
+                }
+                el = document.getElementsByClassName('atr_tag');
+                for(var i=0; i<el.length; i++){
+                    el[i].checked = false;
+                }
+                return true
+            }
+        </script>
+        <fieldset id="stat">
+            <p>
+                <label for="min_level">최소 레벨</label>
+                <input id="min_level" type="text" class="min_max" name="min_level">
+                <label for="max_level">최대 레벨</label>
+                <input id="max_level" type="text" class="min_max" name="max_level">
+                <label for="ATK" style="color: blue; width:50px">최소 공격력</label>
+                <input id="ATK" type="text" class="min_max" name="ATK_MIN">
+                <label for="ATK" style="color: red;">최대 공격력</label>
+                <input id="ATK" type="text" class="min_max" name="ATK_MAX">
+                <label for="DEF" style="color: blue;">최소 수비력</label>
+                <input id="DEF" type="text" class="min_max" name="DEF_MIN">
+                <label for="DEF" style="color: red;">최대 수비력</label>
+                <input id="DEF" type="text" class="min_max" name="DEF_MAX">
+            </p>
+        </fieldset>
+
+        <fieldset id="attribute">
+            <legend>속성</legend>
+            <p>
+                <label class="atr_lab" for="dark">어둠<input id="dark" type="checkbox" value="어둠" class="atr_tag" name="atr"></label>
+                <label class="atr_lab" for="light">빛<input id="light" type="checkbox" value="빛" class="atr_tag" name="atr"></label>
+                <label class="atr_lab" for="earth">땅<input id="earth" type="checkbox" value="땅" class="atr_tag" name="atr"></label>
+                <label class="atr_lab" for="water">물<input id="water" type="checkbox" value="물" class="atr_tag" name="atr"></label>
+                <label class="atr_lab" for=fire>화염<input id="fire" type="checkbox" value="화염" class="atr_tag" name="atr"></label>
+                <label class="atr_lab" for="wind">바람<input id="wind" type="checkbox" value="바람" class="atr_tag" name="atr"></label>
+                <label class="atr_lab" for="divine">신<input id="divine" type="checkbox" value="신" class="atr_tag" name="atr"></label>
+            </p>
+
+        </fieldset>
+        <script>
+            function chageSelect(){
+                var sel = document.getElementById('selection').value;
+
+                /* 직전에 마법/함정 카드를 고른 경우 비활성화했던 체크박스 다시 활성화*/
+                document.getElementById('counter').disabled=false;
+                document.getElementById('equip').disabled=false;
+                document.getElementById('field').disabled=false;
+                document.getElementById('quick_play').disabled=false;
+                document.getElementById('ritual').disabled=false;
+
+                if(sel =='trap' || sel =='magic'){
+                    document.getElementById('attribute').style.visibility = 'hidden';
+                    document.getElementById('stat').style.visibility = 'hidden';
+                    document.getElementById('type').style.visibility = 'hidden';
+                    document.getElementById('icon').style.visibility = 'visible';
+                    /* 마법카드를 선택한 경우 효과의 [카운터] 항목 체크 비활성화 */
+                    if (sel=='magic'){
+                        document.getElementById('counter').disabled=true;
+                        document.getElementById('counter').checked=false;
+                    }
+                    /* 함정카드를 선택한 경우 효과의 [장착, 필드, 속공, 의식] 항목 체크 비활성화 */
+                    else{
+                        document.getElementById('equip').disabled=true;
+                        document.getElementById('equip').checked=false;
+                        document.getElementById('field').disabled=true;
+                        document.getElementById('field').checked=false;
+                        document.getElementById('quick_play').disabled=true;
+                        document.getElementById('quick_play').checked=false;
+                        document.getElementById('ritual').disabled=true;
+                        document.getElementById('ritual').checked=false;
+                    }
+                        
+                    var el = document.getElementsByName('atr');
+                    for(var i=0; i<el.length; i++){
+                        el[i].checked = false;
+                    }
+                    el = document.getElementsByClassName('min_max');
+                    for(var i=0; i<el.length; i++){
+                        el[i].value = '';
+                    }
+                    el = document.getElementsByClassName('type');
+                    for(var i=0; i<el.length; i++){
+                        el[i].checked = false;
+                    }
+                }
+                else if(sel == 'monster'){
+                    document.getElementById('attribute').style.visibility = 'visible';
+                    document.getElementById('stat').style.visibility = 'visible';
+                    document.getElementById('type').style.visibility = 'visible';
+                    document.getElementById('icon').style.visibility = 'hidden';
+                    var el = document.getElementsByName('icon');
+                    for(var i=0; i<el.length; i++){
+                        el[i].checked = false;
+                    }
+                }
+
+                else{
+                    document.getElementById('attribute').style.visibility = 'visible';
+                    document.getElementById('stat').style.visibility = 'visible';
+                    document.getElementById('type').style.visibility = 'visible';
+                    document.getElementById('icon').style.visibility = 'visible';
+                }
+            }
+        </script>
+        <fieldset id="icon">
+            <legend>효과</legend>
+            <p>
+                <label class="atr_lab" for="equip">장착<input id="equip" type="checkbox" value="장착" class="atr_tag" name="icon"></label>
+                <label class="atr_lab" for="field">필드<input id="field" type="checkbox" value="필드" class="atr_tag" name="icon"></label>
+                <label class="atr_lab" for="quick_play">속공<input id="quick_play" type="checkbox" value="속공" class="atr_tag" name="icon"></label>
+                <label class="atr_lab" for="ritual">의식<input id="ritual" type="checkbox" value="의식" class="atr_tag" name="icon"></label>
+                <label class="atr_lab" for="continuous">지속<input id="continuous" type="checkbox" value="지속" class="atr_tag" name="icon"></label>
+                <label class="atr_lab" for="counter">카운터<input id="counter" type="checkbox" value="카운터" class="atr_tag" name="icon"></label>
+                <label class="atr_lab" for="normal">일반<input id="normal" type="checkbox" value="일반" class="atr_tag" name="icon"></label>
+            </p>
+
+        </fieldset>
+        <fieldset id="type">
+            <legend>종족</legend>
+            <p>
+                <label class="atr_lab" for="spellcaster">마법사족<input id="spellcaster" type="checkbox" value="마법사족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="dragon">드래곤족<input id="dragon" type="checkbox" value="드래곤족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="undead">언데드족<input id="undead" type="checkbox" value="언데드족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="warrior">전사족<input id="warrior" type="checkbox" value="전사족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="beast_warrior">야수전사족<input id="beast_warrior" type="checkbox" value="야수전사족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="beast">야수족<input id="beast" type="checkbox" value="야수족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="winged_beast">비행야수족<input id="winged_beast" type="checkbox" value="비행야수족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="fiend">악마족<input id="fiend" type="checkbox" value="악마족" class="atr_tag" name="type"></label>
+
+            </p>
+            <p>
+                <label class="atr_lab" for="fairy">천사족<input id="fairy" type="checkbox" value="천사족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="insect">곤충족<input id="insect" type="checkbox" value="곤충족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="dinosaur">공룡족<input id="dinosaur" type="checkbox" value="공룡족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="repltile">파충류족<input id="repltile" type="checkbox" value="파충류족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="fish">어류족<input id="fish" type="checkbox" value="어류족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="sea_serpent">해룡족<input id="sea_serpent" type="checkbox" value="해룡족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="aqua">물족<input id="aqua" type="checkbox" value="물족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="pyro">화염족<input id="pyro" type="checkbox" value="화염족" class="atr_tag" name="type"></label>
+            </p>
+            <p>
+                <label class="atr_lab" for="thunder">번개족<input id="thunder" type="checkbox" value="번개족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="rock">암석족<input id="rock" type="checkbox" value="암석족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="plant">식물족<input id="plant" type="checkbox" value="식물족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="machine">기계족<input id="machine" type="checkbox" value="기계족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="psychic">사이킥족<input id="psychic" type="checkbox" value="사이킥족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="divine_beast">환신야수족<input id="divine_beast" type="checkbox" value="환신야수족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="wyrm">환룡족<input id="wyrm" type="checkbox" value="환룡족" class="atr_tag" name="type"></label>
+                <label class="atr_lab" for="cyberse">사이버스족<input id="cyberse" type="checkbox" value="사이버스족" class="atr_tag" name="type"></label>
+            </p>
+
+        </fieldset>
+    </form>
+</body>
+</html>

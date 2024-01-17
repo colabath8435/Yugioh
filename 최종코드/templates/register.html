@@ -1,0 +1,39 @@
+<body>    
+    <form method="POST" action=" ">
+        <h1>회원가입</h1>
+        <div id='id_wrapper' style='margin:20px'>
+            <p>아이디</p>
+            <input type = "text" name = "id" minlength=10 maxlength=20/>
+        </div>
+        <div id='password_wrapper' style='margin:20px'>
+            <p>비밀번호</p>
+            <input type = "password" name = "password" minlength=6 maxlength=20 />
+        </div>
+        <div id='confirm_password_wrapper' style='margin:20px'>
+            <p>비밀번호 재입력</p>
+            <input type = "password" name = "password_confirm" minlength=6 maxlength=20 />
+        </div>
+        <div id='name_wrapper' style='margin:20px'>
+            <p>이름</p>
+            <input type = "text" name = "name" minlength=2 maxlength=6/>
+        </div>
+        <div id='birth_date_wrapper' style='margin:20px'>
+            <p>생년월일</p>
+            <p><input type="date" name="birth_date"></p>
+        </div>
+        <div id='gender_wrapper' style='margin:20px'>
+            <p>성별</p>
+            <select name="gender">
+                <option value="남">남성</option>
+                <option value="여">여성</option>
+            </select>
+        </div>
+        <div id='email_wrapper' style='margin:20px'>
+            <p>이메일</p>
+            <input type = "text" name = "email" minlength=10 maxlength=30/>
+        </div>
+    
+        <button type="submit" name="register" value="register" style="position: absolute; left: 30px;"> 가입완료 </button>
+        <button type="submit" name="back" value="back" style="position: absolute; left: 120px;"> 돌아가기 </button>
+    </form>
+</body>

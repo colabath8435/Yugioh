@@ -1,0 +1,54 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search_result</title>
+</head>
+<body>
+    <form action="" method="post">
+        <h2>카드 검색 결과</h2> 
+        <h1>총 {{template_data_len}}개 카드</h1>
+        <button type="submit" id="reBtn" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 275px;" onclick="location.href='/worldcup_main'"> 월드컵시작 </button>
+        <button type="submit" id="reBtn" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 125px;" onclick="location.href='/mainpage'"> 다시검색 </button>
+        <ul>
+            {% for row in template_data %} -->
+                <!-- <li><a name={{ row['card_name'] }} href="/card_info">{{ row['card_name'] }}</a></li> -->
+                <!-- <li><a href="{{url_for}}"></li>> -->
+            <!-- {% endfor%}
+        </ul>
+    </form>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search_result</title>
+</head>
+<body>
+    <form action="" method="post">
+        <h2>카드 검색 결과</h2> 
+        <h1>총 {{template_data_len}}개 카드</h1>
+        <button type="submit" value= {{ session['order_value'] }} name="reorder" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 400px;"> 정렬 </button>
+        <button type="submit" value='worldcup_start' name="worldcup_start" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 275px;"> 월드컵시작 </button>
+        <button type="submit" value='back' name="back" style="width: 120px; height: 60px; position: absolute; top: 35px; right: 125px;"> 다시검색 </button>
+        
+        {% if session.get(order_value) == "False" %}
+            {% for row in template_data  %}
+                <p>
+                <span>{{row[1]}}</span>
+                <button type="submit" name="idx" value={{row[0]}}> 상세보기 </button>
+                </p>
+            {% endfor%}
+        {% else %}
+            {% for row in template_data |reverse %}
+                <p>
+                <span>{{row[1]}}</span>
+                <button type="submit" name="idx" value={{row[0]}}> 상세보기 </button>
+                </p>
+            {% endfor%}
+        {% endif %}
+        
+    </form>
+</body>
+</html>
